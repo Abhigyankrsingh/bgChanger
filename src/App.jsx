@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [color, setColor] = useState("olive");
+
+  const buttonContainerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const buttonStyle = {
+    padding: "0.5rem 1rem",
+    margin: "0.5rem",
+    borderRadius: "999px",
+    cursor: "pointer",
+    border: "none", // Remove the border to have a cleaner look
+    color: "white",
+    fontWeight: "bold",
+  };
+
+  const colorButtons = [
+    { colorName: "Red", colorCode: "red" },
+    { colorName: "Green", colorCode: "green" },
+    { colorName: "Blue", colorCode: "blue" },
+    { colorName: "Yellow", colorCode: "yellow" },
+    { colorName: "Purple", colorCode: "purple" },
+    { colorName: "Orange", colorCode: "orange" },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div
+      style={{
+        backgroundColor: color,
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        paddingBottom: "20px",
+      }}
+    >
+      <div style={buttonContainerStyle}>
+        {colorButtons.map((button, index) => (
+          <button
+            key={index}
+            onClick={() => setColor(button.colorCode)}
+            style={{
+              ...buttonStyle,
+              backgroundColor: button.colorCode,
+            }}
+          >
+            {button.colorName}
+          </button>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
